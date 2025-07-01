@@ -81,7 +81,7 @@ If the output directory is a subdirectory of the data directory (e.g., \[data_di
 **Option 2: Using a Prebuilt Docker Image**
 1. Pull the prebuilt Docker image from Docker Hub:
 ```
-docker pull jor115/tbd
+docker pull jor115/sfp
 ```
 2. Run the Docker container using the pulled image:
 ```
