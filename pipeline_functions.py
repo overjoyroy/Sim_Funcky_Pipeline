@@ -39,9 +39,9 @@ def build_sim_arr(avg_arr):
         column_1 = avg_arr[:,c]
         for r in range(columns):
             column_2 = avg_arr[:, r]
-            if np.any(np.isnan(column_1)) == True or np.any(np.isnan(column_2)) == True: 
-                similarity = np.ma.corrcoef(np.ma.masked_invalid(column_1), np.ma.masked_invalid(column_2))
-                print(f"Invalid value found in column {r} and {c}")[0,1]
+            if np.any(np.isnan(column_1)) == True or np.any(np.isnan(column_2)) == True:
+                similarity = np.ma.corrcoef(np.ma.masked_invalid(column_1), np.ma.masked_invalid(column_2))[0,1]
+                print(f"Invalid value found in column {r} and {c}")
             else:
                 similarity = np.corrcoef(column_1, column_2)[0,1]
             sim_matrix[r, c] = similarity

@@ -5,3 +5,5 @@ __pycache__/
 
 #name of workflow
 preproc/
+
+run.log

@@ -19,10 +19,10 @@ These steps include (but are not limited to):
 - **Demeaning**: Centering the data around zero.
 - **Motion Parameter Regression**: Removing 6 motion parameters, their squares, derivatives, and derivative's squares (total of 24).
 - **Bandpass Filtering**: Applying a bandpass filter to the data.
-- **Spatial Smoothin**g: Applying a smoothing filter to the data.
+- **Spatial Smoothing**: Applying a smoothing filter to the data.
 - **Registration**: Aligning an atlas to the patient space for standardized anatomical referencing.
-- **Scrubbing: Censoring** frames with excessive motion.
-- **Average Regional Signal and Similarity Calculation**: Calculating and collecting volume and first-order radiomics features per ROI.
+- **Scrubbing**: Censoring frames with excessive motion.
+- **Average Regional Signal and Similarity Calculation**: Computing average signal intensity per ROI and generating a pairwise Pearson correlation matrix.
 
 ## Features
 
@@ -51,7 +51,7 @@ At minimum:
 
 To use this tool directly, run the following command:
 ```
-python3 Pipeline.py -p [data_dir_path] -sid [subject-id] -o [output_path] -tem [template_path] -seg [segment_path]
+python3 Pipeline.py -p [data_dir_path] -sid [subject-id] -o [output_path]
 ```
 
 ### Using Docker (Recommended)
@@ -76,16 +76,16 @@ Explanation of Docker Flags:
 ```-u``` $UID:$UID: Runs the Docker container as the same user as on the host machine to avoid file permission issues.
 
 *Notes:
-If the output directory is a subdirectory of the data directory (e.g., \[data_dir_path\]/derivatives), you only need to mount the data directory once and provide the output path relative to the mounted data directory (e.g., /data/my_data/derivatives). Output files will be accessible on the host machine from where the output path was mounted. Default anatomical templates and atlas (MNI152 and AALv3_CombinedThalami respectively) are included so the -tem and -seg flags are optional.*
+If the output directory is a subdirectory of the data directory (e.g., \[data_dir_path\]/derivatives), you only need to mount the data directory once and provide the output path relative to the mounted data directory (e.g., /data/my_data/derivatives). Output files will be accessible on the host machine from where the output path was mounted. Default anatomical templates and atlas (MNI152 and AAL2 respectively) are included so the -tem and -seg flags are optional.*
 
 **Option 2: Using a Prebuilt Docker Image**
 1. Pull the prebuilt Docker image from Docker Hub:
 ```
-docker pull jor115/tbd
+docker pull jor115/sim_funcky_pipeline
 ```
 2. Run the Docker container using the pulled image:
 ```
-docker run -v [data_dir_path]:/data/my_data -v [output_path]:/data/output --rm -u $UID:$UID jor115/tbd -p /data/my_data -sid [subject-id] -o [output_path] 
+docker run -v [data_dir_path]:/data/my_data -v [output_path]:/data/output --rm -u $UID:$UID jor115/sim_funcky_pipeline -p /data/my_data -sid [subject-id] -o [output_path] 
 ```
 *Note: The docker run command is identical to the one used for running a locally built container, but you do not need to download the source code or build the container locally.*
 

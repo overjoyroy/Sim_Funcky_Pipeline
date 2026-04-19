@@ -339,7 +339,7 @@ def ArtifactExtraction(split_images, dvars_outliers, fd_outliers):
     #finds the problematic frames from dvars and adds them to the list of problematic frames from art_detect
     if os.stat(fd_outliers).st_size > 0:
         fd_list = np.loadtxt(fd_outliers)
-        outs = np.where(dvars_list == 1)
+        outs = np.where(fd_list == 1)
         output_frames = list(outs[0])
         for frame in output_frames:
             fd_rejects.append(frame)
@@ -740,8 +740,9 @@ def main():
     outDir        = ''
     outDirName    = 'Sim_Funky_Pipeline'
     session       = vetArgNone(args.session_id, None)
-    template_path = vetArgNone(args.template, '/app/Template/MNI152lin_T1_4mm_brain.nii.gz') #path in docker container
-    segment_path  = vetArgNone(args.segment, '/app/Template/aal2.nii.gz') #path in docker container
+    _template_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'Template')
+    template_path = vetArgNone(args.template, os.path.join(_template_dir, 'MNI152lin_T1_4mm_brain.nii.gz'))
+    segment_path  = vetArgNone(args.segment,  os.path.join(_template_dir, 'aal2.nii.gz'))
     enforceBIDS   = True
 
     if args.testmode:
@@ -776,7 +777,7 @@ def main():
             tic = time.time()
             preproc.run()
             toc = time.time()
-            print('\nElapsed Time to Preprocess: {}s\n'.format(tic-toc))
+            print('\nElapsed Time to Preprocess: {}s\n'.format(toc-tic))
 
 
 
