@@ -81,11 +81,11 @@ If the output directory is a subdirectory of the data directory (e.g., \[data_di
 **Option 2: Using a Prebuilt Docker Image**
 1. Pull the prebuilt Docker image from Docker Hub:
 ```
-docker pull jor115/sim_funcky_pipeline
+docker pull jor115/sfp
 ```
 2. Run the Docker container using the pulled image:
 ```
-docker run -v [data_dir_path]:/data/my_data -v [output_path]:/data/output --rm -u $UID:$UID jor115/sim_funcky_pipeline -p /data/my_data -sid [subject-id] -o [output_path] 
+docker run -v [data_dir_path]:/data/my_data -v [output_path]:/data/output --rm -u $UID:$UID jor115/sfp -p /data/my_data -sid [subject-id] -o [output_path] 
 ```
 *Note: The docker run command is identical to the one used for running a locally built container, but you do not need to download the source code or build the container locally.*
 
